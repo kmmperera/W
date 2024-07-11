@@ -1,12 +1,18 @@
 jQuery(document).ready(function($) {
     $('.ceymulticall-open-modal').on('click', function() {
-        var id = $(this).data('id');
-        var name = $(this).data('name');
-        var email = $(this).data('email');
+        var table = $(this).data('table');
+        var row = $(this).data('row');
 
-        $('#ceymulticall-modal-id').val(id);
-        $('#ceymulticall-modal-name').val(name);
-        $('#ceymulticall-modal-email').val(email);
+        $('#ceymulticall-modal-table').val(table);
+
+        var fieldsHtml = '';
+        $.each(row, function(key, value) {
+            fieldsHtml += '<div class="form-group">';
+            fieldsHtml += '<label for="ceymulticall-modal-' + key + '">' + key + ':</label>';
+            fieldsHtml += '<input type="text" name="' + key + '" id="ceymulticall-modal-' + key + '" value="' + value + '">';
+            fieldsHtml += '</div>';
+        });
+        $('#ceymulticall-modal-fields').html(fieldsHtml);
 
         $('#ceymulticall-update-modal').dialog({
             modal: true,
